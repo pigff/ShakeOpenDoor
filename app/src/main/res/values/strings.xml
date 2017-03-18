@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RongYun</string>
+    <string name="login_only_can_input">qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890-_=+@.</string>
+</resources>
