@@ -28,7 +28,7 @@ import com.lulu.weichatshake.door.DeviceBean;
 
 import java.lang.ref.WeakReference;
 
-public class MainActivity extends Activity implements SensorEventListener {
+public class MainActivity extends Activity implements SensorEventListener, View.OnClickListener{
 
     private static final String TAG = "MainActivity";
     private static final int START_SHAKE = 0x1;
@@ -75,6 +75,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
         }
     };
+    private ImageView mCenterIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,11 +100,13 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
 
     private void initView() {
-
+        mCenterIv = (ImageView) findViewById(R.id.center_iv);
         mTopLayout = (LinearLayout) findViewById(R.id.main_linear_top);
         mBottomLayout = ((LinearLayout) findViewById(R.id.main_linear_bottom));
         mTopLine = (ImageView) findViewById(R.id.main_shake_top_line);
         mBottomLine = (ImageView) findViewById(R.id.main_shake_bottom_line);
+        ImageView topIv = (ImageView) findViewById(R.id.main_shake_top);
+        ImageView bottomIv = (ImageView) findViewById(R.id.main_shake_bottom);
         ImageView backIv = (ImageView) findViewById(R.id.test_img2);
         backIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,8 +118,10 @@ public class MainActivity extends Activity implements SensorEventListener {
         //默认
         mTopLine.setVisibility(View.GONE);
         mBottomLine.setVisibility(View.GONE);
+        mCenterIv.setVisibility(View.GONE);
 
-
+        topIv.setOnClickListener(this);
+        bottomIv.setOnClickListener(this);
     }
 
     @Override
@@ -166,6 +171,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                     //发出提示音
                     mSoundPool.play(mWeiChatAudio, 1, 1, 0, 0, 1);
                     mTopLine.setVisibility(View.VISIBLE);
+                    mCenterIv.setVisibility(View.VISIBLE);
                     mBottomLine.setVisibility(View.VISIBLE);
                     startAnimation(false);//参数含义: (不是回来) 也就是说两张图片分散开的动画
                     LibDevModel libDev = getLibDev(mBean);
@@ -186,6 +192,26 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (!isShake) {
+            if (TextUtils.equals(Utils.getBLEState(), "true")) {
+                isShake = true;
+                mVibrator.vibrate(300);
+                //发出提示音
+                mSoundPool.play(mWeiChatAudio, 1, 1, 0, 0, 1);
+                mTopLine.setVisibility(View.VISIBLE);
+                mCenterIv.setVisibility(View.VISIBLE);
+                mBottomLine.setVisibility(View.VISIBLE);
+                startAnimation(false);//参数含义: (不是回来) 也就是说两张图片分散开的动画
+                LibDevModel libDev = getLibDev(mBean);
+                int ret = LibDevModel.openDoor(MainActivity.this, libDev, callback); //Open door
+            } else {
+                Toast.makeText(this, Utils.getBLEState(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 
@@ -238,15 +264,15 @@ public class MainActivity extends Activity implements SensorEventListener {
         float bottomFromY;
         float bottomToY;
         if (isBack) {
-            topFromY = -0.5f;
+            topFromY = -1.0f;
             topToY = 0;
-            bottomFromY = 0.5f;
+            bottomFromY = 1.0f;
             bottomToY = 0;
         } else {
             topFromY = 0;
-            topToY = -0.5f;
+            topToY = -1.0f;
             bottomFromY = 0;
-            bottomToY = 0.5f;
+            bottomToY = 1.0f;
         }
 
         //上面图片的动画效果
@@ -269,6 +295,7 @@ public class MainActivity extends Activity implements SensorEventListener {
             bottomAnim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
+                    mCenterIv.setVisibility(View.GONE);
                 }
 
                 @Override
@@ -280,6 +307,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                     //当动画结束后 , 将中间两条线GONE掉, 不让其占位
                     mTopLine.setVisibility(View.GONE);
                     mBottomLine.setVisibility(View.GONE);
+
                 }
             });
         }

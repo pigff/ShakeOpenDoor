@@ -48,19 +48,20 @@
         android:layout_height="match_parent">
         <!--摇一摇中心图片-->
         <ImageView
+            android:id="@+id/center_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@mipmap/pic_9"/>
+            android:src="@mipmap/center_01"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:orientation="vertical">
             <!--顶部的横线和图片-->
             <LinearLayout
                 android:id="@+id/main_linear_top"
@@ -73,7 +74,7 @@
                     android:id="@+id/main_shake_top"
                     android:layout_width="wrap_content"
                     android:layout_height="100dp"
-                    android:src="@mipmap/shake_top"/>
+                    android:src="@mipmap/top_02"/>
 
                 <ImageView
                     android:id="@+id/main_shake_top_line"
@@ -85,9 +86,8 @@
             <!--底部的横线和图片-->
             <LinearLayout
                 android:id="@+id/main_linear_bottom"
-                android:layout_width="match_parent"
+                android:layout_width="398dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal|bottom"
                 android:orientation="vertical">
 
                 <ImageView
@@ -99,9 +99,17 @@
                 <ImageView
                     android:id="@+id/main_shake_bottom"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:src="@mipmap/shake_bottom"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/bottom_02"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_22"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/grey"
+                    android:text="点击或摇一摇均可开门禁"/>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
