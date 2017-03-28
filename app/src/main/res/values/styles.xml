@@ -26,4 +26,43 @@
     </style>
 
 
+    <style name="girdBtnStyle">
+        <item name="android:paddingLeft">@dimen/dp_15</item>
+        <item name="android:paddingRight">@dimen/dp_15</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="girdBtn_smallText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">@dimen/dp_5</item>
+        <item name="android:textColor">@color/black_102_color_code</item>
+    </style>
+
+    <style name="gridBtn_bigText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:textColor">@color/black_50_color_code</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="girdBtn_img">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/dp_22</item>
+    </style>
+
+
+    <dimen name="dp_22">22dp</dimen>
+    <dimen name="dp_15">15dp</dimen>
 </resources>

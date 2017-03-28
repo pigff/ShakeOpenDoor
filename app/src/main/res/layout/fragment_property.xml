@@ -1,0 +1,145 @@
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawale_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/border_bottom">
+
+            <ImageView
+                android:id="@+id/test_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/pic_8"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="物业服务"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_22">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="专注解决业主各类物业相关问题"
+                android:textColor="@color/black_50_color_code"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_30"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/grid_btn_notice"
+                    style="@style/girdBtnStyle"
+                    android:layout_marginRight="@dimen/dp_5">
+
+                    <ImageView
+                        style="@style/girdBtn_img"
+                        android:src="@mipmap/pic_1"/>
+
+                    <TextView
+                        style="@style/gridBtn_bigText"
+                        android:text="物业报修"/>
+
+                    <TextView
+                        style="@style/girdBtn_smallText"
+                        android:text="用户对公共设施的保修服务"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/grid_btn_payment"
+                    style="@style/girdBtnStyle">
+
+                    <ImageView
+                        style="@style/girdBtn_img"
+                        android:src="@mipmap/pic_2"/>
+
+                    <TextView
+                        style="@style/gridBtn_bigText"
+                        android:text="物业缴费"/>
+
+                    <TextView
+                        style="@style/girdBtn_smallText"
+                        android:text="用户物业的相关缴费情况"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/grid_btn_repair"
+                    style="@style/girdBtnStyle"
+                    android:layout_marginRight="@dimen/dp_5">
+
+                    <ImageView
+                        style="@style/girdBtn_img"
+                        android:src="@mipmap/pic_3"/>
+
+                    <TextView
+                        style="@style/gridBtn_bigText"
+                        android:text="特约服务"/>
+
+                    <TextView
+                        style="@style/girdBtn_smallText"
+                        android:text="物业和其他服务公司提供的相关后续服务"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/grid_btn_complain"
+                    style="@style/girdBtnStyle">
+
+                    <ImageView
+                        style="@style/girdBtn_img"
+                        android:src="@mipmap/pic_4"/>
+
+                    <TextView
+                        style="@style/gridBtn_bigText"
+                        android:text="物业投诉"/>
+
+                    <TextView
+                        style="@style/girdBtn_smallText"
+                        android:text="用户对物业提出的相关投诉"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <include
+        layout="@layout/smart_home_menu"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"/>
+
+</android.support.v4.widget.DrawerLayout>

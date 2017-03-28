@@ -3,6 +3,7 @@ package com.lulu.weichatshake;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -55,6 +56,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_login);
 
         init();
@@ -121,12 +123,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     Toast.makeText(this, "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        login();
-                    }
-                }).start();
+                if (TextUtils.equals(Utils.getBLEState(), "true")) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            login();
+                        }
+                    }).start();
+                } else {
+                    Toast.makeText(this, Utils.getBLEState(), Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
                 break;
@@ -181,9 +187,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     for (DeviceBean deviceBean : devList) {
                         Log.d(TAG, deviceBean.toString());
                     }
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    Log.d(TAG, devList.get(1).toString());
-                    intent.putExtra(Constants.DATA, devList.get(1));
+                    if (devList.size() == 0) {
+                        Toast.makeText(LoginActivity.this, "当前账号下没有设备,登录失败", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    for (DeviceBean deviceBean : devList) {
+                        Log.d(TAG, "deviceBean:" + deviceBean);
+                    }
+                    Intent intent = new Intent(LoginActivity.this, Main2Activity.class);
+//                    Log.d(TAG, devList.get(0).toString());
+                    intent.putExtra(Constants.DATA, devList.get(0));
                     startActivity(intent);
                     initSp();
                     finish();

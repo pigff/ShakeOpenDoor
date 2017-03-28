@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="01d9e80af7314f385bf791f7583160132a1498e5">
+        sha1="abe9f86aa9134474b926cc8101902424bc0fda4c">
         <dex dex="D:\openSource\WeiChatShake-master\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_4241160a93acf290868b9ca1763f0e295a2a5c2a\classes.dex" />
     </item>
     <item
@@ -34,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="553cbfaaf546af96970b69bb7034c10bab5c882c">
+        sha1="f32c21ad81ac8955a69ad6831abec028def016d8">
         <dex dex="D:\openSource\WeiChatShake-master\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_56eb04bbaa38f645f8e0a2516bd00ed859e44855\classes.dex" />
     </item>
     <item

@@ -13,12 +13,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.intelligoo.sdk.LibDevModel;
 import com.intelligoo.sdk.LibInterface;
@@ -102,6 +104,13 @@ public class MainActivity extends Activity implements SensorEventListener {
         mBottomLayout = ((LinearLayout) findViewById(R.id.main_linear_bottom));
         mTopLine = (ImageView) findViewById(R.id.main_shake_top_line);
         mBottomLine = (ImageView) findViewById(R.id.main_shake_bottom_line);
+        ImageView backIv = (ImageView) findViewById(R.id.test_img2);
+        backIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         //默认
         mTopLine.setVisibility(View.GONE);
@@ -151,22 +160,20 @@ public class MainActivity extends Activity implements SensorEventListener {
 
             if ((Math.abs(x) > 20 || Math.abs(y) > 20 || Math
                     .abs(z) > 20) && !isShake) {
-                isShake = true;
-                mVibrator.vibrate(300);
-                //发出提示音
-                mSoundPool.play(mWeiChatAudio, 1, 1, 0, 0, 1);
-                mTopLine.setVisibility(View.VISIBLE);
-                mBottomLine.setVisibility(View.VISIBLE);
-                startAnimation(false);//参数含义: (不是回来) 也就是说两张图片分散开的动画
-                LibDevModel libDev = getLibDev(mBean);
-                int ret = LibDevModel.openDoor(MainActivity.this, libDev, callback); //Open door
-                if (ret == 0) {
+                if (TextUtils.equals(Utils.getBLEState(), "true")) {
+                    isShake = true;
+                    mVibrator.vibrate(300);
+                    //发出提示音
+                    mSoundPool.play(mWeiChatAudio, 1, 1, 0, 0, 1);
+                    mTopLine.setVisibility(View.VISIBLE);
+                    mBottomLine.setVisibility(View.VISIBLE);
+                    startAnimation(false);//参数含义: (不是回来) 也就是说两张图片分散开的动画
+                    LibDevModel libDev = getLibDev(mBean);
+                    int ret = LibDevModel.openDoor(MainActivity.this, libDev, callback); //Open door
                 } else {
-                    isShake = false;
-                    // 展示上下两种图片回来的效果
-                    startAnimation(true);
-//                    Toast.makeText(getApplicationContext(), "RET：" + ret, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, Utils.getBLEState(), Toast.LENGTH_SHORT).show();
                 }
+
                 //整体效果结束, 将震动设置为false
 
                 //开始震动 发出提示音 展示动画效果

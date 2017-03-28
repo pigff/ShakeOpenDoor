@@ -4,19 +4,8 @@ import java.io.Serializable;
 
 public class DeviceBean implements Serializable {
 
-	/**
-	 * 
-	 */
-	
-	private static final long serialVersionUID = 1L;
-	
-	
-	private String devSn = null;
-	private String devMac = null;
-	private int devType;
-	
-	/*设备类型
- 	(1, (u'门禁读头')),
+    /*设备类型
+     (1, (u'门禁读头')),
     (2, (u'门禁一体机')),
     (3, (u'梯控读头(离线)')),
     (4, (u'无线锁')),
@@ -26,7 +15,28 @@ public class DeviceBean implements Serializable {
     (8, (u'可视对讲')),
     (9, (u'二维码设备')),
     */
-	
+
+    /**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+    private static final String DEVSN = "0350335203";
+    private static final String DEV_MAC = "33:34:14:E1:B0:E3";
+
+	private static final  int DEV_TYPE = 8;
+	private static final  int PRIVILEGE = 1;
+	private static final  int OPEN_TYPE = 3;
+	private static final  int VERIFIED = 1;
+	private static final  int USE_COUNT = 0;
+	private static final  int ENCRYTION = 0;
+	private static final  String START_DATE = "";
+	private static final  String END_DATE = "";
+	private static final  String E_KEY = "b46f591f31c33d7355561c4323cfa149000000000000000000000000000000001000";
+
+
+    private String devMac = null;
+    private String devSn = null;
+    private int devType;
 	private int privilege;
 	private int openType;
 	private int verified;
@@ -112,6 +122,22 @@ public class DeviceBean implements Serializable {
 	public void setEncrytion(int encrytion) {
 		this.encrytion = encrytion;
 	}
+
+    public static DeviceBean getDefault() {
+        DeviceBean bean = new DeviceBean();
+        bean.setDevSn(DEVSN);
+        bean.setDevMac(DEV_MAC);
+        bean.setDevType(DEV_TYPE);
+        bean.setPrivilege(PRIVILEGE);
+        bean.setOpenType(OPEN_TYPE);
+        bean.setVerified(VERIFIED);
+        bean.setStartDate(START_DATE);
+        bean.setEndDate(END_DATE);
+        bean.setUseCount(USE_COUNT);
+        bean.seteKey(E_KEY);
+        bean.setEncrytion(ENCRYTION);
+        return bean;
+    }
 
 	@Override
 	public String toString() {
